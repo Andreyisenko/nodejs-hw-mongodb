@@ -19,7 +19,7 @@ export const setupServer = () => {
 
   app.get('/', (req, res) => {
     res.json({
-      message: 'Hello BoB Sinkler',
+      message: 'Hello Sinabon',
     });
   });
 
