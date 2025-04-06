@@ -6,9 +6,18 @@ export const getContactsById = (id) => ContactCollection.findOne({ _id: id });
 
 export const addContact = (payload) => ContactCollection.create(payload);
 
-export const updateContact = async (_id, payload) => {
-  const data = await ContactCollection.findOneAndUpdate({_id}, payload);
-  
-  return data;
+export const updateContact = async (_id, payload, option = {}) => {
+  const { upsert = false } = option;
+  const rawResult = await ContactCollection.findOneAndUpdate({ _id }, payload, {
+    new: true,
+    upsert,
+    includeResultMetadata: true,
+  });
 
+  if (!rawResult || !rawResult.value) return null;
+
+  return {
+    data: rawResult.value,
+    isNew: Boolean(rawResult.lastErrorObject.upserted),
+  };
 };
