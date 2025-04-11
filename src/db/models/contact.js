@@ -42,6 +42,3 @@ contactSchema.post('findOneAndUpdate', handleSaveError);
 
 const ContactCollection = model('contact', contactSchema);
 export default ContactCollection;
-
-// new: true,
-// runValidators: true,
