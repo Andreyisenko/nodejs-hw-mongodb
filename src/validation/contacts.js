@@ -9,11 +9,11 @@ export const contactAddSchema = Joi.object({
     "string.min": "phoneNumber must be at least 3 characters",
     "string.max": "phoneNumber must be no more than 20 characters",
   }),
-  email: Joi.string().min(3).max(20).required().messages({
+  email: Joi.string().min(3).max(20).messages({
     "string.min": "email must be at least 3 characters",
     "string.max": "email must be no more than 20 characters",
   }),
-  isFavourite: Joi.boolean().required(),
+  isFavourite: Joi.boolean(),
   contactType: Joi.string().valid(...contactTypeList).required(),
 });
 
