@@ -14,12 +14,18 @@ import {
   contactUpdateSchema,
 } from '../validation/contacts.js';
 
+import { authenticate } from '../middlewares/authenticate.js';
 import { isValidId } from '../middlewares/isValidId .js';
 const contactsRouter = Router();
 
+contactsRouter.use(authenticate);
 contactsRouter.get('/', ctrlWrapper(getContactsController));
 
-contactsRouter.get('/:contactId', isValidId, ctrlWrapper(getContactsByIdController));
+contactsRouter.get(
+  '/:contactId',
+  isValidId,
+  ctrlWrapper(getContactsByIdController),
+);
 
 contactsRouter.post(
   '/',
@@ -28,17 +34,25 @@ contactsRouter.post(
 );
 
 contactsRouter.put(
-  '/:contactId', isValidId,
+  '/:contactId',
+  isValidId,
   validateBody(contactAddSchema),
   ctrlWrapper(upsertContactsController),
 );
 
 contactsRouter.patch(
-  '/:contactId', isValidId,
+  '/:contactId',
+  isValidId,
   validateBody(contactUpdateSchema),
   ctrlWrapper(patchContactsController),
 );
 
-contactsRouter.delete('/:contactId', isValidId, ctrlWrapper(deleteContactsController));
+contactsRouter.delete(
+  '/:contactId',
+  isValidId,
+  ctrlWrapper(deleteContactsController),
+);
+
+// contactsRouter.post('/logout', ctrlWrapper(logoutController));
 
 export default contactsRouter;
