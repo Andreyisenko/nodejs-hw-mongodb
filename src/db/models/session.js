@@ -1,6 +1,5 @@
 import { Schema, model } from 'mongoose';
 import { handleSaveError, setUpdateSettings } from './hooks.js';
-// import { ref, required } from 'joi';
 
 const sessionSchema = new Schema(
   {
