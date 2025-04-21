@@ -28,12 +28,12 @@ export const findSession = (query) => sessionCollection.findOne(query);
 
 export const findUser = (query) => userCollection.findOne(query);
 
+
+
 export const registerUser = async (payload) => {
   const { email, password } = payload;
 
   const user = await findUser({ email });
-
-  // console.log(user);
 
   if (user) {
     throw createHttpError(409, 'Email in use');
@@ -43,6 +43,9 @@ export const registerUser = async (payload) => {
 
   return await userCollection.create({ ...payload, password: hashPassword });
 };
+
+
+
 
 export const loginUser = async (payload) => {
   const { email, password } = payload;
