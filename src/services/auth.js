@@ -47,6 +47,8 @@ export const registerUser = async (payload) => {
 
 
 
+
+
 export const loginUser = async (payload) => {
   const { email, password } = payload;
   const user = await findUser({ email });
@@ -76,6 +78,9 @@ export const loginUser = async (payload) => {
     // refreshTokenValidUntil: Date.now() + refreshTokenLifeTime,
   });
 };
+
+
+
 
 export const refreshUser = async ({ refreshToken, sessionId }) => {
   const session = await findSession({ refreshToken, _id: sessionId });
