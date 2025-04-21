@@ -1,6 +1,8 @@
 import { Schema, model } from 'mongoose';
 import { handleSaveError, setUpdateSettings } from './hooks.js';
 import { emailRegexp } from '../../constants/auth.js';
+import { ROLES } from '../../constants/index.js';
+
 const userSchema = new Schema(
   {
     name: {
@@ -10,6 +12,12 @@ const userSchema = new Schema(
     email: { type: String, match: emailRegexp, unique: true, required: true },
 
     password: { type: String, required: true },
+
+    role: {
+      type: String,
+      enum: [ROLES.TEACHER, ROLES.PARENT],
+      default: ROLES.PARENT,
+    },
   },
 
   {
