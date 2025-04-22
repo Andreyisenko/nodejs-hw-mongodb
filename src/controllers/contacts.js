@@ -8,12 +8,23 @@ import {
   updateContact,
   deleteContactById,
 } from '../services/contacts.js';
+import { parseContactFilterParams } from '../utils/filters/parseContactFilterParams.js';
 import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 export const getContactsController = async (req, res) => {
   const paginationParams = parsePaginationParams(req.query);
+  // console.log(req.query);
   const sortParams = parseSortParams(req.query, contactSortFields);
+  const filters = parseContactFilterParams(req.query);
+  // const { contactId } = req.params;
+  filters.userId = req.user._id;
+  // console.log(filters.userId);
+  
+  const data = await getContacts({
+    ...paginationParams,
+    ...sortParams,
+    filters,
+  });
 
-  const data = await getContacts({ ...paginationParams, ...sortParams });
   res.json({
     status: 200,
     message: 'Successfully found contacts!',
@@ -23,7 +34,7 @@ export const getContactsController = async (req, res) => {
 
 export const getContactsByIdController = async (req, res) => {
   const { contactId } = req.params;
-  // console.log(contactId);
+  // console.log(req.params);
 
   const data = await getContactsById(contactId);
 
@@ -40,7 +51,6 @@ export const getContactsByIdController = async (req, res) => {
 
 export const addContactsController = async (req, res) => {
   const { _id: userId } = req.user;
-  // console.log(req.user);
 
   const data = await addContact({ ...req.body, userId });
 
