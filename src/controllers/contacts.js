@@ -12,13 +12,13 @@ import { parseContactFilterParams } from '../utils/filters/parseContactFilterPar
 import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 export const getContactsController = async (req, res) => {
   const paginationParams = parsePaginationParams(req.query);
-  // console.log(req.query);
   const sortParams = parseSortParams(req.query, contactSortFields);
   const filters = parseContactFilterParams(req.query);
   // const { contactId } = req.params;
+  // console.log(req.user);
   filters.userId = req.user._id;
   // console.log(filters.userId);
-  
+
   const data = await getContacts({
     ...paginationParams,
     ...sortParams,
@@ -34,12 +34,17 @@ export const getContactsController = async (req, res) => {
 
 export const getContactsByIdController = async (req, res) => {
   const { contactId } = req.params;
-  // console.log(req.params);
 
+  const userId = req.user._id;
+  const stringUserId = userId.toString();
   const data = await getContactsById(contactId);
-
+  const stringId = data.userId.toString();
   if (!data) {
     throw createHttpError(404, 'Contact not found');
+  }
+
+  if (stringUserId !== stringId) {
+    throw createHttpError(401, 'No access to contact');
   }
 
   res.json({
@@ -73,12 +78,19 @@ export const upsertContactsController = async (req, res) => {
 };
 
 export const patchContactsController = async (req, res) => {
+  const userId = req.user._id;
+  const stringUserId = userId.toString();
+
   const { contactId } = req.params;
   const result = await updateContact(contactId, req.body);
-  console.log(contactId);
+  const stringId = result.data.userId.toString();
 
   if (!result) {
     throw createHttpError(404, 'Contact not found');
+  }
+
+  if (stringUserId !== stringId) {
+    throw createHttpError(401, 'No access to contact');
   }
 
   res.json({
@@ -89,11 +101,19 @@ export const patchContactsController = async (req, res) => {
 };
 
 export const deleteContactsController = async (req, res) => {
+  const userId = req.user._id;
+  const stringUserId = userId.toString();
+
   const { contactId } = req.params;
   const data = await deleteContactById(contactId);
+  const stringId = data.userId.toString();
 
   if (!data) {
     throw createHttpError(404, 'Contact not found');
+  }
+
+  if (stringUserId !== stringId) {
+    throw createHttpError(401, 'No access to contact');
   }
 
   res.status(204).send();
