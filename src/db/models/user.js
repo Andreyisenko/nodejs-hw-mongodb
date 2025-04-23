@@ -9,6 +9,7 @@ const userSchema = new Schema(
       required: true,
     },
     email: { type: String, match: emailRegexp, unique: true, required: true },
+    
 
     password: { type: String, required: true },
   },
