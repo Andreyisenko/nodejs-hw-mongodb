@@ -33,8 +33,6 @@ export const getContacts = async ({
 
 export const getContactsById = (contactId) => {
 
-  // console.log(contactId);
-  // console.log(userId);
   return  ContactCollection.findOne({ _id: contactId });
 };
 
