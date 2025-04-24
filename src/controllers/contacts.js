@@ -35,13 +35,14 @@ export const getContactsByIdController = async (req, res) => {
   const userId = req.user._id;
   const stringUserId = userId.toString();
   const data = await getContactsById(contactId);
-  const stringId = data.userId.toString();
+  console.log(data);
   if (!data) {
-    throw createHttpError(500);
+    throw createHttpError(404, 'Contact not found');
   }
+  const stringId = data.userId.toString();
 
   if (stringUserId !== stringId) {
-    throw createHttpError(404, 'No access to contact');
+    throw createHttpError(403, 'No access to contact');
   }
 
   res.json({
@@ -75,7 +76,7 @@ export const upsertContactsController = async (req, res) => {
    const stringId = dataContact.userId.toString();
  
    if (stringUserId !== stringId) {
-     throw createHttpError(404, 'No access to contact');
+     throw createHttpError(403, 'No access to contact');
    }
 
 }
@@ -102,15 +103,16 @@ export const patchContactsController = async (req, res) => {
   
   const data = await getContactsById(contactId);
   
+  
   if (!data) {
-    throw createHttpError(500);
+    throw createHttpError(404, 'Contact not found');
   }
 
 
   
   const stringId = data.userId.toString();
   if (stringUserId !== stringId) {
-    throw createHttpError(404, 'No access to contact');
+    throw createHttpError(403, 'No access to contact');
   }
 
   const result = await updateContact(contactId, req.body);
@@ -123,6 +125,9 @@ export const patchContactsController = async (req, res) => {
   });
 };
 
+
+
+
 export const deleteContactsController = async (req, res) => {
   const userId = req.user._id;
   const stringUserId = userId.toString();
@@ -132,12 +137,12 @@ export const deleteContactsController = async (req, res) => {
   const data = await getContactsById(contactId);
 
   if (!data) {
-    throw createHttpError(500);
+    throw createHttpError(404, 'Contact not found');
   }
   const stringId = data.userId.toString();
 
   if (stringUserId !== stringId) {
-    throw createHttpError(404, 'No access to contact');
+    throw createHttpError(403, 'No access to contact');
   }
 
   await deleteContactById(contactId);
