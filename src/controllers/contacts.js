@@ -42,7 +42,7 @@ export const getContactsByIdController = async (req, res) => {
   const stringId = data.userId.toString();
 
   if (stringUserId !== stringId) {
-    throw createHttpError(403, 'No access to contact');
+    throw createHttpError(404, 'Contact not found');
   }
 
   res.json({
@@ -76,7 +76,7 @@ export const upsertContactsController = async (req, res) => {
    const stringId = dataContact.userId.toString();
  
    if (stringUserId !== stringId) {
-     throw createHttpError(403, 'No access to contact');
+     throw createHttpError(404, 'Contact not found');
    }
 
 }
@@ -112,7 +112,7 @@ export const patchContactsController = async (req, res) => {
   
   const stringId = data.userId.toString();
   if (stringUserId !== stringId) {
-    throw createHttpError(403, 'No access to contact');
+    throw createHttpError(404, 'Contact not found');
   }
 
   const result = await updateContact(contactId, req.body);
@@ -142,7 +142,7 @@ export const deleteContactsController = async (req, res) => {
   const stringId = data.userId.toString();
 
   if (stringUserId !== stringId) {
-    throw createHttpError(403, 'No access to contact');
+    throw createHttpError(404, 'Contact not found');
   }
 
   await deleteContactById(contactId);
