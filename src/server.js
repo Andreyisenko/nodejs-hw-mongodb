@@ -8,7 +8,7 @@ import contactsRouter from './routers/contacts.js';
 import { getEnvVar } from './utils/getEnvVar.js';
 
 import authRouter from './routers/auth.js';
-
+import { UPLOAD_DIR } from './constants/index.js';
 export const setupServer = () => {
   const app = express();
   app.use(cors());
@@ -17,7 +17,7 @@ export const setupServer = () => {
 
   // app.use(logger);
   app.use('/auth', authRouter);
-
+  app.use('/uploads', express.static(UPLOAD_DIR));
   app.use('/contacts', contactsRouter);
 
   app.use(notFoundHandler);
