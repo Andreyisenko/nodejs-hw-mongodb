@@ -81,6 +81,8 @@ export const addContactsController = async (req, res) => {
 export const upsertContactsController = async (req, res) => {
   const { contactId } = req.params;
   const userId = req.user._id;
+  console.log(userId);
+
   const stringUserId = userId.toString();
 
   const dataContact = await getContactsById(contactId);
