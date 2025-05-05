@@ -9,6 +9,7 @@ import { getEnvVar } from './utils/getEnvVar.js';
 
 import authRouter from './routers/auth.js';
 import { UPLOAD_DIR } from './constants/index.js';
+import { swaggerDocs } from './middlewares/swaggerDocs.js';
 export const setupServer = () => {
   const app = express();
   app.use(cors());
@@ -20,6 +21,7 @@ export const setupServer = () => {
   app.use('/uploads', express.static(UPLOAD_DIR));
   app.use('/contacts', contactsRouter);
 
+  app.use('/api-docs', swaggerDocs());
   app.use(notFoundHandler);
 
   app.use(errorHandler);

@@ -11,13 +11,10 @@ cloudinary.v2.config({
 });
 
 export const saveFileToCloudinary = async (file) => {
-  // console.log('Uploading to Cloudinary:', file.path); // ← отладка пути
-
   const response = await cloudinary.v2.uploader.upload(file.path, {
     folder: 'contacts/photos',
     transformation: [{ quality: 'auto', fetch_format: 'auto' }],
   });
-  // console.log('Cloudinary response:', response); // ← отладка результата
 
   await fs.unlink(file.path);
 
