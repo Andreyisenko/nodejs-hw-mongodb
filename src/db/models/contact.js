@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 import { handleSaveError, setUpdateSettings } from './hooks.js';
 import { contactTypeList } from '../../constants/contacts.js';
-import { type } from 'node:os';
+// import { type } from 'node:os';
 const contactSchema = new Schema(
   {
     name: {
