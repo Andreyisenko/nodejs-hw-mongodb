@@ -396,7 +396,7 @@
         },
         "responses": {
           "200": {
-            "description": "Patsh a contact",
+            "description": "Patch a contact",
             "content": {
               "application/json": {
                 "schema": {
