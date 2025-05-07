@@ -1,6 +1,6 @@
 tags:
   - Contacts
-summary: Get list of Contacts
+summary: Get list of contacts
 operationId: getContacts
 description: 'Get list of contacts with this endpoint'
 security:
@@ -36,7 +36,7 @@ parameters:
       example: 'work'
 responses:
   '200':
-    description: Successfully found students!
+    description: Successfully found contacts!
     content:
       application/json:
         schema:

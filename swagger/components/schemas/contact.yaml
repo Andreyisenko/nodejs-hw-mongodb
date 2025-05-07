@@ -19,7 +19,7 @@ properties:
   phoneNumber:
     description: "Contacts's phoneNumber"
     type: number
-    example: 122-33-33
+    example: '122-33-33'
   email:
     description: "Contacts's email"
     type: string
@@ -35,7 +35,7 @@ properties:
   userId:
     description: "Contacts's user id"
     type: string
-    example: 65e4decdd286b30065d54af9
+    example: '65e4decdd286b30065d54af9'
   photo:
     description: "Link to contacts's photo"
     type: string
