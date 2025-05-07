@@ -11,10 +11,10 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000"
+      "url": "https://nodejs-hw-mongodb-8-yzlm.onrender.com"
     },
     {
-      "url": "http://example.com/api/v1"
+      "url": "http://localhost:3000"
     }
   ],
   "tags": [
@@ -29,7 +29,7 @@
         "tags": [
           "Contacts"
         ],
-        "summary": "Get list of Contacts",
+        "summary": "Get list of contacts",
         "operationId": "getContacts",
         "description": "Get list of contacts with this endpoint",
         "security": [
@@ -91,7 +91,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully found students!",
+            "description": "Successfully found contacts!",
             "content": {
               "application/json": {
                 "schema": {
@@ -260,6 +260,9 @@
           },
           "401": {
             "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
           }
         }
       }
@@ -463,8 +466,7 @@
                 "schema": {
                   "type": "object",
                   "required": [
-                    "status",
-                    "message"
+                    "status"
                   ],
                   "properties": {
                     "status": {

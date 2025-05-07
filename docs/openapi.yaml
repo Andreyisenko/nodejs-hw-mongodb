@@ -10,8 +10,9 @@ tags:
   - name: Contacts
     description: Operations about contacts.
 servers:
+  - url: https://nodejs-hw-mongodb-9-j6fj.onrender.com
   - url: https://nodejs-hw-mongodb-8-yzlm.onrender.com
-  # - url: http://example.com/api/v1
+  - url: http://localhost:3000
 paths:
   /contacts:
     get:
