@@ -3,8 +3,8 @@ required:
   - _id
   - name
   - phoneNumber
-  - email
-  - isFavourite
+  # - email
+  # - isFavourite
   - contactType
   - userId
 properties:
