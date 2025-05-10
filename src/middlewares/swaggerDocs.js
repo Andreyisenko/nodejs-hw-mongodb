@@ -4,7 +4,7 @@ import swaggerUI from 'swagger-ui-express';
 export const swaggerDocs = () => {
   try {
     const swaggerDoc = JSON.parse(readFileSync(SWAGGER_PATH).toString());
-    console.log(swaggerDoc);
+    // console.log(swaggerDoc);
 
     return [...swaggerUI.serve, swaggerUI.setup(swaggerDoc)];
   } catch {
