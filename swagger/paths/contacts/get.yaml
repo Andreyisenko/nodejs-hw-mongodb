@@ -69,16 +69,16 @@ responses:
                     $ref: ../../components/schemas/contact.yaml
                 page:
                   type: number
-                  example: 2
+                  example: 1
                 perPage:
                   type: number
-                  example: 4
+                  example: 1
                 totalItems:
                   type: number
-                  example: 4
+                  example: 1
                 totalPages:
                   type: number
-                  example: 4
+                  example: 1
                 hasNextPage:
                   type: boolean
                   example: false
@@ -87,4 +87,3 @@ responses:
                   example: true
   '401':
     $ref: '../../components/responses/401.yaml'
-

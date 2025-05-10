@@ -22,6 +22,12 @@ const setupSession = (res, session) => {
 export const registerController = async (req, res) => {
   const user = await registerUser(req.body);
 
+  const session = await loginUser({
+    email: user.email,
+    password: req.body.password,
+  });
+
+  setupSession(res, session);
   res.status(201).json({
     status: 201,
     message: 'Successfully registered a user!',
@@ -32,15 +38,6 @@ export const registerController = async (req, res) => {
 export const loginController = async (req, res) => {
   const session = await loginUser(req.body);
 
-  // res.cookie('refreshToken', session.refreshToken, {
-  //   httpOnly: true,
-  //   expires: session.refreshTokenValidUntil,
-  // });
-
-  // res.cookie('sessionId', session._id, {
-  //   httpOnly: true,
-  //   expires: session.refreshTokenValidUntil,
-  // });
   setupSession(res, session);
 
   res.json({
@@ -55,15 +52,6 @@ export const loginController = async (req, res) => {
 export const refreshController = async (req, res) => {
   const session = await refreshUser(req.cookies);
 
-  // res.cookie('refreshToken', session.refreshToken, {
-  //   httpOnly: true,
-  //   expires: session.refreshTokenValidUntil,
-  // });
-
-  // res.cookie('sessionId', session._id, {
-  //   httpOnly: true,
-  //   expires: session.refreshTokenValidUntil,
-  // });
   setupSession(res, session);
 
   res.json({

@@ -34,7 +34,7 @@ export const getContactsController = async (req, res) => {
 
 export const getContactsByIdController = async (req, res) => {
   const { contactId } = req.params;
-  console.log(contactId);
+  // console.log(contactId);
 
   const userId = req.user._id;
   const stringUserId = userId.toString();
@@ -81,7 +81,7 @@ export const addContactsController = async (req, res) => {
 export const upsertContactsController = async (req, res) => {
   const { contactId } = req.params;
   const userId = req.user._id;
-  console.log(userId);
+  // console.log(userId);
 
   const stringUserId = userId.toString();
 
